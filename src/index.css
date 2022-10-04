@@ -1,9 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+body {
+  background-image: linear-gradient(to right, #09b88f, #af38eb);
+}
+
 .container {
   font-family: "Roboto", sans-serif;
   width: 100%;
   margin: 0 auto;
-  /* padding: 0 20px; */
   text-align: center;
 }
 
@@ -28,7 +32,6 @@
 
 .timer {
   font-size: large;
-  margin-bottom: "20px";
 }
 
 .timer-paper {
@@ -40,4 +43,14 @@
 
 .toggle-buttons {
   margin-top: "20px";
+}
+
+@font-face {
+  font-family: digits;
+  src: url(/src/fonts/digital-7.regular.ttf);
+}
+
+#count {
+  font-family: digits;
+  color: white;
 }

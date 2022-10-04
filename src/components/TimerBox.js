@@ -1,14 +1,42 @@
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
-import StarterButtons from "./StarterButtons";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import ButtonGroup from "@mui/material/ButtonGroup";
-import { useState, useEffect } from "react";
 import useTimer from "easytimer-react-hook";
 import useSound from "use-sound";
 import sound from "../sounds/sound.mp3";
-// import Timer from "./Timer";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { purple, teal } from "@mui/material/colors";
+
+//Start Button Theme
+// change theme color of our starter buttons
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: purple[800],
+    },
+    secondary: {
+      main: "#f44336",
+    },
+  },
+});
+
+// The entire timer box is now light green. Thanks to this.
+const paperTheme = createTheme({
+  components: {
+    // Name of the component
+    MuiPaper: {
+      styleOverrides: {
+        // Name of the slot
+        root: {
+          // Some CSS
+          backgroundColor: teal[300],
+        },
+      },
+    },
+  },
+});
 
 //The timer counter
 const timerStyle = {
@@ -20,13 +48,13 @@ const timerStyle = {
 const insideBox = {
   height: 150,
   width: 200,
-  bgcolor: "#cfcbc0",
+  bgcolor: "#383736",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
   borderRadius: "3px",
   marginTop: "10px",
-  fontSize: "50px",
+  fontSize: "80px",
 };
 //////////////////////
 
@@ -38,17 +66,27 @@ const timerBoxStyle = {
     m: 1,
     width: 400,
     height: 300,
+    borderRadius: "5px",
+  },
+};
+
+const controlButtonColor = {
+  backgroundColor: "#383736",
+  color: "white",
+  borderColor: "black",
+  "&:hover": {
+    backgroundColor: "black",
+    borderColor: "black",
   },
 };
 
 // All of the start stop buttons pause and the counter will be inside this component
 function TimerBox() {
   const [timer, isTargetAchieved] = useTimer({
-    startValues: { minutes: 25 },
     countdown: true,
   });
 
-  const [play, exposedData] = useSound(sound);
+  const [play] = useSound(sound);
 
   timer.addEventListener("targetAchieved", () => {
     play();
@@ -56,79 +94,112 @@ function TimerBox() {
   return (
     <>
       <Box sx={timerBoxStyle}>
-        <Paper elevation={3}>
-          <div className="starter-buttons">
-            <Grid container spacing={0}>
-              <Grid item xs={6}>
-                <Button
-                  onClick={() => {
-                    timer.start({
-                      startValues: { seconds: 5 },
-                      target: { minutes: 0, seconds: 0 },
-                      // updateWhenTargetAchieved: true,
-                    });
-                  }}
-                  variant="contained"
-                  size="large"
-                >
-                  25 min
-                </Button>
+        {/* <div className="timer-box"> */}
+        <ThemeProvider theme={paperTheme}>
+          {" "}
+          {/* wrapping our custom theme on the Paper */}
+          <Paper elevation={8}>
+            {/* Starter Buttons START*/}
+            <div className="starter-buttons">
+              <Grid container spacing={0}>
+                <Grid item xs={6}>
+                  <ThemeProvider theme={theme}>
+                    {" "}
+                    {/* wrapping our button for custom theme */}
+                    <Button
+                      onClick={() => {
+                        timer.start({
+                          startValues: { minutes: 25 },
+                          target: { minutes: 0, seconds: 0 },
+                        });
+                      }}
+                      variant="contained"
+                      size="large"
+                      sx={{ backgroundColor: "#43a047" }}
+                    >
+                      25 min
+                    </Button>
+                  </ThemeProvider>
+                </Grid>
+                <Grid item xs={6}>
+                  <ThemeProvider theme={theme}>
+                    {" "}
+                    {/* wrapping our button for custom theme */}
+                    <Button
+                      onClick={() => {
+                        timer.start({ startValues: { minutes: 5 } });
+                      }}
+                      variant="contained"
+                      size="large"
+                      sx={{ backgroundColor: "#f44336" }}
+                    >
+                      5 min
+                    </Button>
+                  </ThemeProvider>
+                </Grid>
               </Grid>
-              <Grid item xs={6}>
-                <Button
-                  onClick={() => {
-                    timer.start({ startValues: { seconds: 5 } });
-                  }}
-                  variant="contained"
-                  size="large"
-                >
-                  5 min
-                </Button>
-              </Grid>
-            </Grid>
-          </div>
-          <div className="timer">
-            <Box sx={timerStyle}>
-              <Box sx={insideBox}>
-                <div id="count">
-                  {isTargetAchieved ? (
-                    <span>Done</span>
-                  ) : (
-                    <span>
-                      {timer.getTimeValues().toString(["minutes", "seconds"])}
-                    </span>
-                  )}
-                </div>
+            </div>
+            {/* Starter Buttons END*/}
+
+            {/* Timer START */}
+            <div className="timer">
+              <Box sx={timerStyle}>
+                <Box sx={insideBox}>
+                  <div id="count">
+                    {isTargetAchieved ? (
+                      <span>Done</span>
+                    ) : (
+                      <span>
+                        {timer.getTimeValues().toString(["minutes", "seconds"])}
+                      </span>
+                    )}
+                  </div>
+                </Box>
               </Box>
+            </div>
+            {/* Timeer END */}
+
+            {/* Pause buttons START */}
+            <Box sx={{ marginTop: "10px" }}>
+              <ButtonGroup size="large" aria-label="large button group">
+                <Button
+                  onClick={() => {
+                    timer.stop();
+                  }}
+                  sx={controlButtonColor}
+                >
+                  Stop
+                </Button>
+                <Button
+                  onClick={() => {
+                    timer.pause();
+                  }}
+                  sx={controlButtonColor}
+                >
+                  Pause
+                </Button>
+                <Button
+                  onClick={() => {
+                    timer.reset();
+                  }}
+                  sx={controlButtonColor}
+                >
+                  Reset
+                </Button>
+                <Button
+                  onClick={() => {
+                    timer.start();
+                  }}
+                  sx={controlButtonColor}
+                >
+                  Resume
+                </Button>
+              </ButtonGroup>
             </Box>
-          </div>
-          {/* <Timer isTargetAchieved={isTargetAchieved} timer={timer} /> */}
-          <Box sx={{ marginTop: "10px" }}>
-            <ButtonGroup size="large" aria-label="large button group">
-              <Button
-                onClick={() => {
-                  timer.stop();
-                }}
-              >
-                Stop
-              </Button>
-              <Button
-                onClick={() => {
-                  timer.pause();
-                }}
-              >
-                Pause
-              </Button>
-              <Button
-                onClick={() => {
-                  timer.reset();
-                }}
-              >
-                Reset
-              </Button>
-            </ButtonGroup>
-          </Box>
-        </Paper>
+            {/* Pause buttons END */}
+          </Paper>
+        </ThemeProvider>
+        {/* </div> */}
       </Box>
     </>
   );
