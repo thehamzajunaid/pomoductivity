@@ -7,7 +7,8 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import { useState, useEffect } from "react";
 import useTimer from "easytimer-react-hook";
 import useSound from "use-sound";
-import alarm from "../sounds/alarm.mp3";
+import sound from "../sounds/sound.mp3";
+// import Timer from "./Timer";
 
 //The timer counter
 const timerStyle = {
@@ -47,17 +48,11 @@ function TimerBox() {
     countdown: true,
   });
 
-  const [play, exposedData] = useSound(alarm);
+  const [play, exposedData] = useSound(sound);
 
-  const [sound, setSound] = useState(false);
-  const [pause, setPause] = useState(false);
-
-  if (sound && !pause) {
+  timer.addEventListener("targetAchieved", () => {
     play();
-  } else {
-    exposedData.stop();
-  }
-
+  });
   return (
     <>
       <Box sx={timerBoxStyle}>
@@ -67,15 +62,11 @@ function TimerBox() {
               <Grid item xs={6}>
                 <Button
                   onClick={() => {
-                    // exposedData.stop();
-                    // setSound(false);
-                    setPause(false);
-                    timer.start({ startValues: { seconds: 5 } });
-
-                    setTimeout(() => {
-                      // play();
-                      setSound(true);
-                    }, 5000);
+                    timer.start({
+                      startValues: { seconds: 5 },
+                      target: { minutes: 0, seconds: 0 },
+                      // updateWhenTargetAchieved: true,
+                    });
                   }}
                   variant="contained"
                   size="large"
@@ -86,13 +77,7 @@ function TimerBox() {
               <Grid item xs={6}>
                 <Button
                   onClick={() => {
-                    // setSound(false);
-                    // exposedData.stop();
-                    setPause(false);
                     timer.start({ startValues: { seconds: 5 } });
-                    setTimeout(() => {
-                      setSound(true);
-                    }, 5000);
                   }}
                   variant="contained"
                   size="large"
@@ -106,17 +91,23 @@ function TimerBox() {
             <Box sx={timerStyle}>
               <Box sx={insideBox}>
                 <div id="count">
-                  {timer.getTimeValues().toString(["minutes", "seconds"])}
+                  {isTargetAchieved ? (
+                    <span>Done</span>
+                  ) : (
+                    <span>
+                      {timer.getTimeValues().toString(["minutes", "seconds"])}
+                    </span>
+                  )}
                 </div>
               </Box>
             </Box>
           </div>
+          {/* <Timer isTargetAchieved={isTargetAchieved} timer={timer} /> */}
           <Box sx={{ marginTop: "10px" }}>
             <ButtonGroup size="large" aria-label="large button group">
               <Button
                 onClick={() => {
                   timer.stop();
-                  setPause(true);
                 }}
               >
                 Stop
@@ -124,7 +115,6 @@ function TimerBox() {
               <Button
                 onClick={() => {
                   timer.pause();
-                  setPause(true);
                 }}
               >
                 Pause
@@ -132,7 +122,6 @@ function TimerBox() {
               <Button
                 onClick={() => {
                   timer.reset();
-                  setPause(true);
                 }}
               >
                 Reset

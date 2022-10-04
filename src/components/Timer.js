@@ -27,13 +27,19 @@ const insideBox = {
   fontSize: "50px",
 };
 
-function Timer({}) {
+function Timer({ isTargetAchieved, timer }) {
   return (
     <>
       <div className="timer">
         <Box sx={timerStyle}>
           <Box sx={insideBox}>
-            {/* {timer.getTimeValues().toString(["minutes", "seconds"])} */}0
+            {isTargetAchieved ? (
+              <span>Done</span>
+            ) : (
+              <span>
+                {timer.getTimeValues().toString(["minutes", "seconds"])}
+              </span>
+            )}
           </Box>
         </Box>
       </div>
