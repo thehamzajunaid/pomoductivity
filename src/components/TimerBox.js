@@ -6,6 +6,7 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import useTimer from "easytimer-react-hook";
 import useSound from "use-sound";
 import sound from "../sounds/sound.mp3";
+import click from "../sounds/select-click.mp3";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { purple, teal } from "@mui/material/colors";
 
@@ -83,10 +84,12 @@ const controlButtonColor = {
 // All of the start stop buttons pause and the counter will be inside this component
 function TimerBox() {
   const [timer, isTargetAchieved] = useTimer({
+    target: { minutes: 0, seconds: 0 },
     countdown: true,
   });
 
   const [play] = useSound(sound);
+  const [playClick] = useSound(click);
 
   timer.addEventListener("targetAchieved", () => {
     play();
@@ -110,8 +113,8 @@ function TimerBox() {
                       onClick={() => {
                         timer.start({
                           startValues: { minutes: 25 },
-                          target: { minutes: 0, seconds: 0 },
                         });
+                        playClick();
                       }}
                       variant="contained"
                       size="large"
@@ -127,7 +130,10 @@ function TimerBox() {
                     {/* wrapping our button for custom theme */}
                     <Button
                       onClick={() => {
-                        timer.start({ startValues: { minutes: 5 } });
+                        timer.start({
+                          startValues: { minutes: 5 },
+                        });
+                        playClick();
                       }}
                       variant="contained"
                       size="large"
@@ -146,13 +152,11 @@ function TimerBox() {
               <Box sx={timerStyle}>
                 <Box sx={insideBox}>
                   <div id="count">
-                    {isTargetAchieved ? (
-                      <span>Done</span>
-                    ) : (
+                    {
                       <span>
                         {timer.getTimeValues().toString(["minutes", "seconds"])}
                       </span>
-                    )}
+                    }
                   </div>
                 </Box>
               </Box>
