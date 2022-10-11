@@ -1,12 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 body {
-  background-image: linear-gradient(to right, #09b88f, #af38eb);
+  background-image: linear-gradient(to right, #2196f3, #f44336);
 }
 
 .container {
   font-family: "Roboto", sans-serif;
-  width: 100%;
+  width: 700px;
   margin: 0 auto;
   text-align: center;
 }
@@ -15,9 +15,9 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 20px;
+  padding: 10px 10px;
   border-bottom: 2px solid #0a0a0a;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
 
 .navbar ul {
@@ -53,4 +53,10 @@ body {
 #count {
   font-family: digits;
   color: white;
+}
+
+/* Tasks */
+
+.tasks-box {
+  width: 600;
 }

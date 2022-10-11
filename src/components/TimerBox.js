@@ -8,7 +8,8 @@ import useSound from "use-sound";
 import sound from "../sounds/sound.mp3";
 import click from "../sounds/select-click.mp3";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { purple, teal } from "@mui/material/colors";
+import { purple } from "@mui/material/colors";
+import { useState } from "react";
 
 //Start Button Theme
 // change theme color of our starter buttons
@@ -32,7 +33,7 @@ const paperTheme = createTheme({
         // Name of the slot
         root: {
           // Some CSS
-          backgroundColor: teal[300],
+          backgroundColor: "#deb976",
         },
       },
     },
@@ -84,15 +85,24 @@ const controlButtonColor = {
 // All of the start stop buttons pause and the counter will be inside this component
 function TimerBox() {
   const [timer, isTargetAchieved] = useTimer({
-    target: { minutes: 0, seconds: 0 },
     countdown: true,
+    // startValues: { minutes: 25 },
   });
 
-  const [play] = useSound(sound);
+  // const [play] = useSound(sound);
   const [playClick] = useSound(click);
+  const [play] = useSound(sound);
 
-  timer.addEventListener("targetAchieved", () => {
+  const [alarmSound, setAlarmSound] = useState(false);
+
+  if (alarmSound) {
     play();
+    setTimeout(() => {
+      setAlarmSound(false);
+    }, 3000);
+  }
+  timer.addEventListener("targetAchieved", () => {
+    setAlarmSound(true);
   });
   return (
     <>
@@ -132,6 +142,7 @@ function TimerBox() {
                       onClick={() => {
                         timer.start({
                           startValues: { minutes: 5 },
+                          target: { minutes: 0, seconds: 0 },
                         });
                         playClick();
                       }}
