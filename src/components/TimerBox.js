@@ -33,7 +33,7 @@ const paperTheme = createTheme({
         // Name of the slot
         root: {
           // Some CSS
-          backgroundColor: "#deb976",
+          backgroundColor: "#eb675e",
         },
       },
     },
@@ -54,7 +54,7 @@ const insideBox = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  borderRadius: "3px",
+  borderRadius: "6px",
   marginTop: "10px",
   fontSize: "80px",
 };
@@ -148,7 +148,7 @@ function TimerBox() {
                       }}
                       variant="contained"
                       size="large"
-                      sx={{ backgroundColor: "#f44336" }}
+                      sx={{ backgroundColor: "#e80707" }}
                     >
                       5 min
                     </Button>

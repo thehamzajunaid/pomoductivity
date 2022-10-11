@@ -21,7 +21,7 @@ const theme = createTheme({
 const containerStyle = {
   width: 500,
   height: 40,
-  bgcolor: "#deb976",
+  bgcolor: "#ed6f66",
   marginTop: "20px",
   padding: "5px",
   borderRadius: "8px",
