@@ -18,12 +18,18 @@ body {
   padding: 10px 10px;
   border-bottom: 2px solid #0a0a0a;
   margin-bottom: 40px;
+  font-size: 20px;
 }
 
 .navbar ul {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.logo {
+  font-family: papyrus;
+  font-weight: bold;
 }
 
 .starter-buttons {
@@ -59,4 +65,27 @@ body {
 
 .tasks-box {
   width: 600;
+}
+
+/* The Description.js component */
+
+.method li {
+  margin-bottom: 5px;
+}
+
+.method {
+  margin-bottom: 40px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none !important;
+  color: black;
+}
+
+.tasksList {
+  border-bottom: 1px solid #0a0a0a;
 }

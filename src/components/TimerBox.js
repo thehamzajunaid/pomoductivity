@@ -33,7 +33,7 @@ const paperTheme = createTheme({
         // Name of the slot
         root: {
           // Some CSS
-          backgroundColor: "#eb675e",
+          backgroundColor: "#c486eb",
         },
       },
     },
@@ -115,7 +115,7 @@ function TimerBox() {
             {/* Starter Buttons START*/}
             <div className="starter-buttons">
               <Grid container spacing={0}>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                   <ThemeProvider theme={theme}>
                     {" "}
                     {/* wrapping our button for custom theme */}
@@ -134,7 +134,7 @@ function TimerBox() {
                     </Button>
                   </ThemeProvider>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                   <ThemeProvider theme={theme}>
                     {" "}
                     {/* wrapping our button for custom theme */}
@@ -151,6 +151,26 @@ function TimerBox() {
                       sx={{ backgroundColor: "#e80707" }}
                     >
                       5 min
+                    </Button>
+                  </ThemeProvider>
+                </Grid>
+                <Grid item xs={4}>
+                  <ThemeProvider theme={theme}>
+                    {" "}
+                    {/* wrapping our button for custom theme */}
+                    <Button
+                      onClick={() => {
+                        timer.start({
+                          startValues: { minutes: 15 },
+                          target: { minutes: 0, seconds: 0 },
+                        });
+                        playClick();
+                      }}
+                      variant="contained"
+                      size="large"
+                      sx={{ backgroundColor: "#42aaf5" }}
+                    >
+                      15 min
                     </Button>
                   </ThemeProvider>
                 </Grid>

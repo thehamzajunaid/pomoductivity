@@ -21,7 +21,7 @@ const theme = createTheme({
 const containerStyle = {
   width: 500,
   height: 40,
-  bgcolor: "#ed6f66",
+  bgcolor: "#c486eb",
   marginTop: "20px",
   padding: "5px",
   borderRadius: "8px",
@@ -78,8 +78,14 @@ function Tasks() {
           id="standard-basic"
           placeholder="Type here"
           value={input}
+          inputProps={{ maxLength: 50 }}
           onChange={(e) => setInput(e.target.value)}
           sx={{ marginTop: "5px" }}
+          onKeyDown={(e) => {
+            if (e.key == "Enter") {
+              onAddTaskClicked();
+            }
+          }}
         />
       </Container>
       {/*1: END  */}
@@ -104,13 +110,13 @@ function Tasks() {
       {/* 2: END */}
 
       {/*3: Tasks List */}
-      <div>
+      <div className="tasksList">
         {tasks.length > 0 ? (
           tasks.map((task) => (
             <SingleTask key={task.id} task={task} id={task.id} />
           ))
         ) : (
-          <span>No tasks</span>
+          <span>No tasks added yet</span>
         )}
       </div>
       {/* 3: END */}

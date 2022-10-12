@@ -1,11 +1,16 @@
 import React from "react";
+import { FaInfoCircle } from "react-icons/fa";
 
-function Navbar() {
+function Navbar({ executeScroll }) {
   return (
     <>
       <div className="navbar">
         <div className="logo">Pomoductivity</div>
-        <ul>About</ul>
+        <a href="javascript:" onClick={executeScroll}>
+          <ul>
+            <FaInfoCircle />
+          </ul>
+        </a>
       </div>
     </>
   );
