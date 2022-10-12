@@ -21,7 +21,7 @@ const theme = createTheme({
 const containerStyle = {
   width: 500,
   height: 40,
-  bgcolor: "#c486eb",
+  bgcolor: "#52f7d6",
   marginTop: "20px",
   padding: "5px",
   borderRadius: "8px",
@@ -79,6 +79,7 @@ function Tasks() {
           placeholder="Type here"
           value={input}
           inputProps={{ maxLength: 50 }}
+          autoComplete="off"
           onChange={(e) => setInput(e.target.value)}
           sx={{ marginTop: "5px" }}
           onKeyDown={(e) => {

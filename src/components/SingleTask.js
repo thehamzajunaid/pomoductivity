@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 const taskListStyle = {
   width: 500,
   padding: "10px 10px",
-  backgroundColor: "#9e93d9",
+  backgroundColor: "#5ca2f7",
   marginTop: "5px",
   textAlign: "left",
   borderRadius: "8px",

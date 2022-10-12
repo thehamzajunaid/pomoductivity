@@ -33,7 +33,8 @@ const paperTheme = createTheme({
         // Name of the slot
         root: {
           // Some CSS
-          backgroundColor: "#c486eb",
+          // backgroundColor: "#c486eb",
+          backgroundColor: "#52f7d6",
         },
       },
     },
