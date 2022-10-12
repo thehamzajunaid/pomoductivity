@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@700&family=Roboto&display=swap");
 
 body {
   background-image: linear-gradient(to right, #2196f3, #f44336);
@@ -28,7 +29,7 @@ body {
 }
 
 .logo {
-  font-family: papyrus;
+  font-family: "Fuzzy Bubbles";
   font-weight: bold;
 }
 
@@ -81,9 +82,17 @@ html {
   scroll-behavior: smooth;
 }
 
+.paragraph {
+  margin-top: 15px;
+}
+
 a {
   text-decoration: none !important;
   color: black;
+}
+
+.footer-note {
+  font-size: 12px;
 }
 
 .tasksList {
