@@ -35,15 +35,6 @@ const addTaskContainerStyle = {
   paddingRight: "0",
 };
 
-const taskListStyle = {
-  width: 500,
-  padding: "10px 10px",
-  backgroundColor: "#9e93d9",
-  marginTop: "5px",
-  textAlign: "left",
-  borderRadius: "8px",
-};
-
 function Tasks() {
   // Redux Store things
   //The tasks list from the store.

@@ -48,6 +48,7 @@ const timerStyle = {
   justifyContent: "center",
 };
 
+//The box where the counter is running. The decimals.
 const insideBox = {
   height: 150,
   width: 200,
@@ -61,6 +62,7 @@ const insideBox = {
 };
 //////////////////////
 
+//The outer box inside which we have all the buttons and the counter box.
 const timerBoxStyle = {
   display: "flex",
   flexWrap: "wrap",
@@ -73,6 +75,7 @@ const timerBoxStyle = {
   },
 };
 
+//Some styles for stop,pause buttons
 const controlButtonColor = {
   backgroundColor: "#383736",
   color: "white",
@@ -87,13 +90,13 @@ const controlButtonColor = {
 function TimerBox() {
   const [timer, isTargetAchieved] = useTimer({
     countdown: true,
-    // startValues: { minutes: 25 },
   });
 
   // const [play] = useSound(sound);
   const [playClick] = useSound(click);
   const [play] = useSound(sound);
 
+  //Once the timer achieved the target (0 mins, 0 seconds) then we set this to true. We use this to play finish sound
   const [alarmSound, setAlarmSound] = useState(false);
 
   if (alarmSound) {
@@ -102,6 +105,9 @@ function TimerBox() {
       setAlarmSound(false);
     }, 3000);
   }
+
+  //A method from the easytimer library which listens to event. Here the target achieved is event.
+  // When target is getting achieved we set the alarmSound to true so we can play the sound.
   timer.addEventListener("targetAchieved", () => {
     setAlarmSound(true);
   });
