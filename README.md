@@ -1,2 +1,2 @@
 The app is deployed at this link
-(https://pomoductivity-timer.netlify.app/)
+[Pomoductivity](https://pomoductivity-timer.netlify.app/)
